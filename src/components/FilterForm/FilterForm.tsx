@@ -32,7 +32,7 @@ export default function FilterForm() {
     const getInput = (name: string) =>
       form.elements.namedItem(name) as HTMLInputElement;
 
-    const username = getInput("username").value;
+    const username = getInput("username").value.trim();
     const water = getInput("water").checked;
     const gas = getInput("gas").checked;
 
