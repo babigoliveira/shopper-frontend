@@ -8,7 +8,7 @@ import { MEASURE_TYPES } from "@/components/CreateMeasure/CreateMeasure";
 import Image from "next/image";
 import cn from "@/cn";
 import useBreakpoints from "@/hooks/useBreakpoint";
-import shopperApi from "@/apis/shopperApi";
+import { registerMeasure } from "@/apis/shopperApi";
 import { toast } from "react-toastify";
 
 interface ConfirmationStepProps extends IStep {}
@@ -41,11 +41,10 @@ const ConfirmationStep = ({
     update({ loading: true });
 
     try {
-      const response = await shopperApi.post("/upload", {
-        customer_code: username,
-        measure_datetime: new Date().toISOString(),
-        measure_type: measureType,
-        image: measurePicture,
+      const response = await registerMeasure({
+        customerCode: username!,
+        measureType: measureType!,
+        image: measurePicture!,
       });
 
       const { measure_value, measure_uuid } = response.data;

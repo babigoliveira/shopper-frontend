@@ -4,6 +4,7 @@ import { createStore } from "zustand";
 import { devtools } from "zustand/middleware";
 import { MeasureType } from "@/components/CreateMeasure/CreateMeasure";
 import merge from "lodash.merge";
+import { Reading } from "@/apis/shopperApi";
 
 export interface State {
   measurePicture: string | null;
@@ -12,6 +13,7 @@ export interface State {
   loading: boolean;
   measureValue: null | number;
   measureUuid: null | string;
+  filteredMeasures: Reading[] | null;
 }
 
 export interface Actions {
@@ -27,6 +29,7 @@ const INITIAL_STATE = {
   loading: false,
   measureValue: null,
   measureUuid: null,
+  filteredMeasures: null,
 } as const satisfies State;
 
 export type AppStoreApi = ReturnType<typeof createAppStore>;

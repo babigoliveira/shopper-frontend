@@ -4,7 +4,7 @@ import { AppStoreContext } from "@/appStoreContext";
 import { useStore } from "zustand";
 import { IStep } from "@/components/Stepper/Stepper";
 import { Button, Input } from "@nextui-org/react";
-import shopperApi from "@/apis/shopperApi";
+import { confirmMeasure } from "@/apis/shopperApi";
 import { toast } from "react-toastify";
 import Image from "next/image";
 import useBreakpoints from "@/hooks/useBreakpoint";
@@ -32,11 +32,7 @@ const ConfirmMeasureStep = ({
     const measureValue = +input.value;
 
     try {
-      await shopperApi.patch("/confirm", {
-        measure_uuid: measureUuid,
-        confirmed_value: measureValue,
-      });
-
+      await confirmMeasure(measureUuid!, measureValue);
       toast.success("Leitura confirmada");
       onNextStep();
     } catch (error) {
