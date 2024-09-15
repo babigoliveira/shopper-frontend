@@ -5,6 +5,7 @@ import "./globals.css";
 import { NextUIProvider } from "@nextui-org/react";
 import type { ReactNode } from "react";
 import { ToastContainer } from "react-toastify";
+import cn from "@/cn";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,23 +21,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={inter.className}>
-        <NextUIProvider>
-          <div
-            className={`
-              mx-auto
-              h-screen
-              px-4
-              pt-24
-              sm:px-6
-              md:px-12
-              lg:max-w-screen-lg
-              lg:pt-36
-              xl:max-w-screen-xl
-          `}
-          >
-            {children}
-          </div>
+      <body
+        className={cn(
+          inter.className,
+          "mx-auto flex flex-col px-2 md:max-w-lg lg:max-w-xl",
+        )}
+      >
+        <NextUIProvider validationBehavior="native" locale="pt-br">
+          {children}
         </NextUIProvider>
         <ToastContainer position="bottom-right" closeOnClick draggable />
       </body>
