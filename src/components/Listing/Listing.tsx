@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   MEASURE_TYPES,
   MeasureType,
@@ -21,6 +21,8 @@ import { MdClose, MdDone } from "react-icons/md";
 import Link from "next/link";
 import { HiDotsVertical } from "react-icons/hi";
 import { toast } from "react-toastify";
+import { AppStoreContext } from "@/appStoreContext";
+import { useStore } from "zustand";
 
 interface Reading {
   measure_type: MeasureType;
@@ -28,10 +30,6 @@ interface Reading {
   measure_uuid: string;
   image_url: string;
   has_confirmed: boolean;
-}
-
-interface ListingProps {
-  measures: Reading[];
 }
 
 const columns = [
@@ -141,13 +139,21 @@ const renderCell = (reading: Reading, columnKey: string) => {
   }
 };
 
-const Listing = ({ measures: readings }: ListingProps) => {
+const Listing = () => {
+  const store = useContext(AppStoreContext);
+
+  const { filteredMeasures } = useStore(store!);
+
+  if (!filteredMeasures) {
+    return null;
+  }
+
   return (
     <Table isStriped aria-label="Listagem de leituras">
       <TableHeader columns={columns}>
         {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
       </TableHeader>
-      <TableBody items={readings ?? []}>
+      <TableBody items={filteredMeasures ?? []}>
         {(item) => (
           <TableRow key={item.measure_uuid}>
             {(columnKey) => (

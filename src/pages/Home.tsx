@@ -1,20 +1,24 @@
+import React from "react";
+
 import CreateMeasureModal from "@/components/CreateMeasureModal/CreateMeasureModal";
 import Listing from "@/components/Listing/Listing";
-import React, { useContext } from "react";
-import { AppStoreContext } from "@/appStoreContext";
-import { useStore } from "zustand";
 import FilterForm from "@/components/FilterForm/FilterForm";
 
-export default function Home() {
-  const store = useContext(AppStoreContext);
-
-  const { filteredMeasures } = useStore(store!);
-
+// @ts-ignore
+function SafeHydrate({ children }) {
   return (
-    <div>
-      <FilterForm />
-      {filteredMeasures && <Listing measures={filteredMeasures} />}
-      <CreateMeasureModal />
+    <div suppressHydrationWarning>
+      {typeof window === "undefined" ? null : children}
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <SafeHydrate>
+      <FilterForm />
+      <Listing />
+      <CreateMeasureModal />
+    </SafeHydrate>
   );
 }
