@@ -17,6 +17,7 @@ import InsertUsernameStep from "@/components/Steps/InsertUsernameStep";
 import ConfirmationStep from "@/components/Steps/ConfirmationStep";
 import ConfirmMeasureStep from "@/components/Steps/ConfirmMeasureStep";
 import { IoAddOutline } from "react-icons/io5";
+import MeasureExampleStep from "@/components/Steps/MeasureExampleStep";
 
 export default function CreateMeasureModal() {
   const store = useContext(AppStoreContext);
@@ -44,6 +45,7 @@ export default function CreateMeasureModal() {
       </Button>
 
       <Modal
+        size="lg"
         isDismissable={false}
         backdrop={"opaque"}
         isOpen={isOpen}
@@ -61,6 +63,7 @@ export default function CreateMeasureModal() {
                     onFinish={() => handleFinish(onClose)}
                     steps={[
                       CreateMeasure,
+                      MeasureExampleStep,
                       ScreenshotStep,
                       ConfirmScreenshotStep,
                       InsertUsernameStep,

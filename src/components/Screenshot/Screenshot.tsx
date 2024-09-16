@@ -101,7 +101,7 @@ const Screenshot = ({ onCapture }: ScreenshotProps) => {
         }}
       >
         <video
-          className="rounded border border-red-500"
+          className="rounded border border-gray-500 md:min-w-[30rem]"
           ref={video}
           id="captureVideo"
           onCanPlay={handleCanPlay}
@@ -110,7 +110,7 @@ const Screenshot = ({ onCapture }: ScreenshotProps) => {
         </video>
 
         <Button
-          className="absolute bottom-4 h-24 w-24 rounded-full bg-transparent p-4 text-white"
+          className="absolute bottom-8 h-24 w-24 rounded-full bg-transparent p-4 text-white"
           isIconOnly
           size="lg"
           variant="ghost"

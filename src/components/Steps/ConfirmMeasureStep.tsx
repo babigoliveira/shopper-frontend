@@ -42,12 +42,12 @@ const ConfirmMeasureStep = ({
     }
   };
 
-  const imageHeight = isMediumScreen ? 500 : 600;
+  const imageHeight = isMediumScreen ? 600 : 400;
 
   return (
     <form onSubmit={handleSubmit}>
       <Image
-        className="mx-auto mb-4 rounded border border-red-500"
+        className="mx-auto mb-4 rounded border border-gray-500"
         width={(imageHeight * 3) / 4}
         height={imageHeight}
         src={measurePicture!}

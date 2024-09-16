@@ -5,25 +5,35 @@ import { useStore } from "zustand";
 import Image from "next/image";
 import { IStep } from "@/components/Stepper/Stepper";
 
-interface ConfirmScreenshotStepProps extends IStep {}
+import hidrometro from "@/assets/hidrometro.png";
+import manometro from "@/assets/manometro.png";
+import useBreakpoints from "@/hooks/useBreakpoint";
 
-const ConfirmScreenshotStep = ({
+interface MeasureExampleStepProps extends IStep {}
+
+const MeasureExampleStep = ({
   onNextStep,
   onPrevStep,
-}: ConfirmScreenshotStepProps) => {
+}: MeasureExampleStepProps) => {
+  const { md: isMediumScreen } = useBreakpoints();
+
   const store = useContext(AppStoreContext);
 
-  const { measurePicture } = useStore(store!);
+  const { measureType } = useStore(store!);
+
+  const exampleFigure = measureType === "WATER" ? manometro : hidrometro;
+
+  const imageHeight = isMediumScreen ? 600 : 400;
 
   return (
     <div>
-      <p className="mb-4">A imagem está OK?</p>
+      <p className="mb-4">Exemplo de medidor</p>
       <div className="flex justify-center">
         <Image
           className="rounded border border-gray-500"
-          width={400}
-          height={(400 * 3) / 4}
-          src={measurePicture!}
+          width={(imageHeight * 3) / 4}
+          height={imageHeight}
+          src={exampleFigure!}
           alt="Imagem da leitura"
         />
       </div>
@@ -37,4 +47,4 @@ const ConfirmScreenshotStep = ({
   );
 };
 
-export default ConfirmScreenshotStep;
+export default MeasureExampleStep;

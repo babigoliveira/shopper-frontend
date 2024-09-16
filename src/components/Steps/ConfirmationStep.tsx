@@ -62,7 +62,7 @@ const ConfirmationStep = ({
     }
   };
 
-  const imageHeight = isMediumScreen ? 300 : 400;
+  const imageHeight = isMediumScreen ? 600 : 400;
 
   return (
     <div>
@@ -79,7 +79,7 @@ const ConfirmationStep = ({
         <div>
           <dd className="mt-2">
             <Image
-              className="mx-auto rounded border border-red-500"
+              className="mx-auto rounded border border-gray-500"
               width={(imageHeight * 3) / 4}
               height={imageHeight}
               src={measurePicture!}
